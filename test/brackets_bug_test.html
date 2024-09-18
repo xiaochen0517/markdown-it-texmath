@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+  <link rel="stylesheet" href="../css/texmath.css">
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+  <script src="../texmath.js"></script>
+  <title>beg_end test</title>
+</head>
+<body>
+<div id="out"></div>
+<script>
+  const str =
+    `为了计算一个函数在最高重试5次的情况下整体出错的概率，我们可以用补事件的概念来简化计算。
+
+设函数出错的概率为 \\( p = 0.05 \\)，成功的概率为 \\( 1 - p = 0.95 \\)。
+
+1. 第一次执行失败的概率是 \\( 0.05 \\)。
+2. 第二次执行失败的概率也是 \\( 0.05 \\)，但前提是第一次执行也失败，即 \\( 0.05 \\times 0.05 \\)。
+3. 同样地，第三次执行失败的概率是 \\( 0.05 \\) 且前两次都失败，即 \\( 0.05 \\times 0.05 \\times 0.05 \\)。
+
+这样，一直到第五次：
+
+整体出错的概率就是所有5次都失败的概率：
+\\[ 0.05 \\times 0.05 \\times 0.05 \\times 0.05 \\times 0.05 = (0.05)^5 \\]
+
+计算：
+\\[ (0.05)^5 = 0.05 \\times 0.05 \\times 0.05 \\times 0.05 \\times 0.05 \\]
+\\[ = 3.125 \\times 10^{-7} \\]
+
+\\[
+  f(x) = y
+\\]
+
+所以，函数在最高重试5次的情况下整体出错的概率是 \\( 0.0000003125 \\)，即大约为 \\( 0.00003125\\% \\)。
+
+这个概率非常小，意味着经过最高5次重试后，整体出错的几率是非常低的。`
+  document.addEventListener("DOMContentLoaded", () => {
+    const md = markdownit({html:true}).use(texmath, { engine: katex,
+      delimiters: ["brackets"]
+    });
+    out.innerHTML = md.render(str);
+//        console.log(md.render(str))
+  })
+</script>
+</body>
+</html>
